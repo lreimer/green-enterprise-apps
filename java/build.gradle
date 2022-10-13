@@ -1,0 +1,18 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+application {
+    mainClass = 'green.enterprise.app.Microservice'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
