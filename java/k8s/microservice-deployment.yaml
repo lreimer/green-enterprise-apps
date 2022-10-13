@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-enterprise-java
+  labels:
+    type: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: green-enterprise-java
+  template:
+    metadata:
+      labels:
+        app: green-enterprise-java
+    spec:
+      containers:
+      - name: green-enterprise-java
+        image: green-enterprise-java
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "0.5"
+          limits:
+            memory: "256Mi"
+            cpu: "0.5"
+        ports:
+          - name: http
+            containerPort: 8080
