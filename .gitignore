@@ -1,6 +1,8 @@
 .dccache
 .gradle/
 .vscode/
+target/
+node_modules/
 
 build/
 bin/
