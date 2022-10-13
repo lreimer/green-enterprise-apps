@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-enterprise-rust
+  labels:
+    type: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: green-enterprise-rust
+  template:
+    metadata:
+      labels:
+        app: green-enterprise-rust
+    spec:
+      containers:
+      - name: green-enterprise-rust
+        image: green-enterprise-rust
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "0.5"
+          limits:
+            memory: "256Mi"
+            cpu: "0.5"
+        ports:
+          - name: http
+            containerPort: 8080
