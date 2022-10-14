@@ -1,15 +1,12 @@
-FROM golang:1.18-bullseye as build
+FROM rust:1.64.0 as builder
 
-WORKDIR /go/src/app
-ADD . /go/src/app
+WORKDIR /app
+COPY . /app
+RUN cargo build --release
 
-RUN go get -d -v ./...
-RUN go build -o /go/bin/green-enterprise-golang
-
-FROM gcr.io/distroless/base-debian11
+FROM gcr.io/distroless/cc
 
 ENV PORT=8080
 
-COPY --from=build /go/bin/green-enterprise-golang /
-
-CMD ["/green-enterprise-golang"]
+COPY --from=builder /app/target/release/rust /green-enterprise-rust
+ENTRYPOINT ["/green-enterprise-rust"]
